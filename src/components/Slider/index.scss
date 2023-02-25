@@ -1,0 +1,31 @@
+@import "../../scss/styles.scss";
+
+.slider {
+  height: base(0.3);
+  box-sizing: border-box;
+  margin: 0 base(0.5);
+  position: relative;
+  background: yellow;
+  transition: all 2s linear;
+  &__btn__wrap {
+    margin-top: base(-0.13);
+    margin-left: base(-0.15);
+    margin-right: base(-0.15);
+    position: absolute;
+    height: base(0.3);
+    width: base(0.3);
+  }
+  &__btn {
+    background: red;
+    border: base(0.12) solid white;
+    border-radius: $style-radius-l;
+    height: base(0.3);
+    width: base(0.3);
+  }
+  &__process {
+    // margin: base(1);
+    height: 100%;
+    width: 0;
+    background: pink;
+  }
+}

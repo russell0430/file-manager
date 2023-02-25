@@ -1,0 +1,10 @@
+@import "../../../scss/styles.scss";
+
+.icon--full-screen {
+  height: $baseline;
+  width: $baseline;
+
+  .fill {
+    fill: var(--theme-elevation-800);
+  }
+}

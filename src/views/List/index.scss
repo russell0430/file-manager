@@ -1,0 +1,36 @@
+@import "../../scss/styles";
+
+.list {
+  // margin: 0 auto;
+  // width:540px;
+  // background-color: red;
+  // background: var(--theme-elevation-50);
+  // padding: 0 base(0.25);
+  // @include small-break {
+  //   background-color: red;
+  //   &__wrap {
+  //     width: 540px;
+  //   }
+  // }
+  // @include mid-break {
+  //   background-color: red;
+  //   &__wrap {
+  //     width: 720px;
+  //   }
+  // }
+  // @include large-break {
+  //   background-color: red;
+  //   &__wrap {
+  //     width: 840px;
+  //   }
+  // }
+  &__wrap {
+    // min-width: 768px;
+    background: red;
+    margin: 0 auto;
+    border-radius: $style-radius-m;
+    // padding: 0 base(0.25);
+    width:100%;
+  }
+  
+}

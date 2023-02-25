@@ -1,0 +1,120 @@
+@use "sass:math";
+
+/////////////////////////////
+// BREAKPOINTS
+/////////////////////////////
+
+$breakpoint-xs-width: 400px !default;
+$breakpoint-s-width: 768px !default;
+$breakpoint-m-width: 1024px !default;
+$breakpoint-l-width: 1440px !default;
+$breakpoint-xl-width: 2560px !default;
+//////////////////////////////
+// BASELINE GRID
+//////////////////////////////
+///
+$baseline-px: 25px !default;
+$baseline-body-size: 13px !default;
+$baseline: math.div($baseline-px, $baseline-body-size) + rem;
+@function base($multiplier) {
+  @return (math.div($baseline-px, $baseline-body-size) * $multiplier) + rem;
+}
+
+// what is the difference between @function and @mixin ?
+
+//////////////////////////////
+// STYLES
+//////////////////////////////
+
+$style-radius-s: 3px !default;
+$style-radius-m: 4px !default;
+$style-radius-l: 10px !default;
+$style-stroke-width: 1px !default;
+
+$style-stroke-width-s: 1px !default;
+$style-stroke-width-m: 2px !default;
+
+//////////////////////////////
+// MISC
+//////////////////////////////
+
+$top-header-offset: calc(#{base(4)} - 1px);
+$top-header-offset-m: base(3);
+$focus-box-shadow: 0 0 0 $style-stroke-width-m var(--theme-success-500);
+
+//////////////////////////////
+// SHADOWS
+//////////////////////////////
+
+@mixin shadow-sm {
+  box-shadow: 0 2px 3px 0 rgba(0, 2, 4, 0.05),
+    0 10px 4px -8px rgba(0, 2, 4, 0.02);
+}
+
+@mixin inputShadowActive {
+  box-shadow: 0 2px 3px 0 rgba(0, 2, 4, 0.16),
+    0 6px 4px -4px rgba(0, 2, 4, 0.13);
+}
+
+@mixin inputShadow {
+  @include shadow-sm;
+
+  &:not(:disabled) {
+    &:hover {
+      box-shadow: 0 2px 3px 0 rgba(0, 2, 4, 0.13),
+        0 6px 4px -4px rgba(0, 2, 4, 0.1);
+    }
+
+    &:active,
+    &:focus-within,
+    &:focus {
+      @include inputShadowActive;
+    }
+  }
+}
+
+@mixin formInput() {
+  @include inputShadow;
+  width: 100%;
+  border: 1px solid var(--theme-elevation-150);
+  background: var(--theme-input-bg);
+  color: var(--theme-elevation-800);
+  border-radius: 0;
+  font-size: 1rem;
+  height: base(2);
+  line-height: base(1);
+  padding: base(0.5) base(0.75);
+  -webkit-appearance: none;
+
+  &::-webkit-input-placeholder {
+    color: var(--theme-elevation-400);
+    font-weight: normal;
+    font-size: 1rem;
+  }
+
+  &::-moz-placeholder {
+    color: var(--theme-elevation-400);
+    font-weight: normal;
+    font-size: 1rem;
+  }
+
+  &:hover {
+    border-color: var(--theme-elevation-250);
+  }
+
+  &:focus,
+  &:focus-within,
+  &:active {
+    border-color: var(--theme-elevation-400);
+    outline: 0;
+  }
+
+  &:disabled {
+    background: var(--theme-elevation-200);
+    color: var(--theme-elevation-450);
+
+    &:hover {
+      border-color: var(--theme-elevation-150);
+    }
+  }
+}

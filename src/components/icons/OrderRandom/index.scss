@@ -1,0 +1,10 @@
+@import "../../../scss/styles";
+
+.icon--order-random {
+  height: $baseline;
+  width: $baseline;
+
+  .fill {
+    fill: var(--theme-text);
+  }
+}

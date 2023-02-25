@@ -1,0 +1,26 @@
+// imported in main.tsx
+
+@import "styles";
+@import "colors";
+:root {
+  --breakpoint-xs-width: #{$breakpoint-xs-width};
+  --breakpoint-s-width: #{$breakpoint-s-width};
+  --breakpoint-m-width: #{$breakpoint-m-width};
+  --breakpoint-l-width: #{$breakpoint-l-width};
+
+  --gutter-h: #{base(5)};
+
+  @include large-break {
+    --gutter-h: #{base(3)};
+    --nav-width: #{base(8)};
+  }
+
+  @include mid-break {
+    --gutter-h: #{base(2)};
+    --nav-width: 0;
+  }
+
+  @include small-break {
+    --gutter-h: #{base(0.5)};
+  }
+}

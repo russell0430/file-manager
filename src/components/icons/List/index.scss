@@ -1,0 +1,10 @@
+@import "../../../scss/styles.scss";
+
+.icon--list {
+  height: $baseline;
+  width: $baseline;
+
+  .fill {
+    fill: var(--theme-text);
+  }
+}

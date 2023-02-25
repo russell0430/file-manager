@@ -1,0 +1,29 @@
+@import "../../scss/styles.scss";
+
+.search-box {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  @include mid-break {
+    .icon--search {
+      display: none;
+    }
+  }
+  .icon--search {
+    flex: 1 0 auto;
+    height: base(1.5);
+    width: base(1.5);
+    flex-basis: base(1.5);
+    background-color: --theme-input-bg;
+  }
+  &__input {
+    padding: base(0.3);
+    input {
+      @include formInput;
+      height: base(1);
+      line-height: base(1);
+      box-sizing: border-box;
+      flex-grow: 1;
+    }
+  }
+}

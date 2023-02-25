@@ -1,0 +1,27 @@
+@import "../../scss/styles.scss";
+
+.detail {
+  .main {
+    display: flex;
+    margin-top: 1rem;
+    .sidebar {
+      // position: absolute;
+      transition: all 0.3s ease-in;
+      width: 200px;
+      flex: 0 1 auto;
+      overflow: hidden;
+      &.hide {
+        width: 0;
+      }
+    }
+    .content {
+      flex: 1 1 auto;
+      overflow: hidden;
+      .navbar {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
+    }
+  }
+}
