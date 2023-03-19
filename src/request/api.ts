@@ -35,6 +35,7 @@ const api = {
     options: RequestInit = { headers: {} }
   ): Promise<Response> => {
     const headers = options && options.headers ? { ...options.headers } : {}
+
     const formattedOptions: RequestInit = {
       ...options,
       method: "post",

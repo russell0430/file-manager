@@ -1,9 +1,8 @@
 import React from "react"
 import { Props } from "./types"
 
-import "./index.scss"
 import { Link } from "@/routes/Link"
-
+import { BreadcrumbContainer } from "./style"
 const baseClass = "breadcrumb"
 
 const Breadcrumb: React.FC<Props> = (props) => {
@@ -12,22 +11,22 @@ const Breadcrumb: React.FC<Props> = (props) => {
   if (linksLength === 0) return null
   const classes = [baseClass].filter(Boolean).join(" ")
   return (
-    <section className={classes}>
-      <div className={`${baseClass}__wrap`}>
+    <BreadcrumbContainer className={classes}>
+      <div className="wrap">
         {navLinks.map((item, index) => {
           return (
-            <div key={index} className={`${baseClass}__labels`}>
-              <div className={`${baseClass}__link`}>
+            <div key={index} className="labels">
+              <div className="link">
                 <Link to={item.to}>{item.label || item.name}</Link>
               </div>
               {index !== linksLength - 1 ? (
-                <div className={`${baseClass}__slash`}>/</div>
+                <div className="slash">/</div>
               ) : null}
             </div>
           )
         })}
       </div>
-    </section>
+    </BreadcrumbContainer>
   )
 }
 

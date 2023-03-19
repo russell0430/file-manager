@@ -1,75 +1,40 @@
 import Search from "@/components/icons/Search"
 import React, { useEffect, useState } from "react"
-import Header from "../Header"
+import Header from "../../components/Header"
 import Breadcrumb from "@/components/Breadcrumb"
-import Player from "../Player"
-import Video from "../Video"
-import "./index.scss"
-import Audio from "../Audio"
+import Player from "@/previews/Player"
+import Video from "../../previews/Video"
 import Slider from "@/components/Slider"
 import List from "../List"
 import { useRouter } from "@/routes/router"
 import { parseLocation, processPaths } from "@/utiliities/utils"
-import Markdown from "@/components/Markdown"
+import Markdown from "@/previews/Markdown"
 import Sidebar from "@/components/Sidebar"
 import { Item } from "@/components/Sidebar/types"
-import { getTotalFolder } from "@/request"
-import Menu from "@/components/icons/Menu"
+import { getFolder } from "@/request"
 import Edit from "@/components/icons/Edit"
+import Grid from "../Grid"
+import { FolderShowEnum } from "./types"
+import ListIcon from "@/components/icons/List"
+import GridIcon from "@/components/icons/Grid"
+import { ContextMenuProvider } from "@/utiliities/ContextMenu"
+import { ContentContainer, DetailContainer } from "./style"
+
 const baseClass = "detail"
 
-const items = [
-  {
-    name: "a",
-    to: "/",
-    thumbnail: "ss",
-    actions: [{ name: "seach", icon: <Search />, handleClick() {} }],
-  },
-  {
-    name: "a",
-    to: "/",
-    thumbnail: "ss",
-    actions: [{ name: "seach", icon: <Search />, handleClick() {} }],
-  },
-  {
-    name: "a",
-    to: "/",
-    thumbnail: "ss",
-    actions: [{ name: "seach", icon: <Search />, handleClick() {} }],
-  },
-  {
-    name: "a",
-    to: "/",
-    thumbnail: "ss",
-    actions: [
-      { name: "seach", icon: <Search />, handleClick() {} },
-      { name: "seach", icon: <Search />, handleClick() {} },
-      { name: "seach", icon: <Search />, handleClick() {} },
-      { name: "seach", icon: <Search />, handleClick() {} },
-    ],
-  },
-]
-
-const videoSrc = "http://localhost:5174/video/movie.mp4"
 const Detail: React.FC = () => {
-  const options = {
-    autoplay: true,
-    controls: true,
-    responsive: true,
-    fluid: true,
-    sources: [{ src: videoSrc, type: "video/mp4" }],
-  }
-
   const { navigate, location } = useRouter()
   const { ext, dir, filename } = parseLocation(location)
-  let component: React.ReactNode | null = null
-  // if (!!ext) {
-  //   // console.log(ext)
-  //   component = <Video />
-  // } else {
-  //   component = <List></List>
-  // }
 
+  const [folderShow, setFolderShow] = useState<FolderShowEnum>(
+    FolderShowEnum.list
+  )
+  const toggleFolderShow = () => {
+    if (folderShow === FolderShowEnum.list) setFolderShow(FolderShowEnum.grid)
+    else if (folderShow === FolderShowEnum.grid)
+      setFolderShow(FolderShowEnum.list)
+  }
+  let component: React.ReactNode | null = null
   switch (ext) {
     case "md": {
       component = <Markdown></Markdown>
@@ -85,42 +50,39 @@ const Detail: React.FC = () => {
       break
     }
     case "": {
-      component = <List></List>
+      component = (
+        <ContextMenuProvider>
+          {folderShow === FolderShowEnum.list ? <List /> : <Grid />}
+        </ContextMenuProvider>
+      )
       break
     }
   }
   const navlinks = processPaths(dir.concat([filename || ""]).filter(Boolean))
   // console.log(navlinks)
-  const [sidebarContent, setSidebarContent] = useState<Item[]>([])
-  const [showSidebar, setshowSidebar] = useState(true)
-  useEffect(() => {
-    getTotalFolder("/", true).then(async (response) => {
-      const result = (await response.json()) as { result: any }
-      setSidebarContent(result.result)
-    })
-  }, [])
+
   return (
-    <div className={`${baseClass}`}>
+    <DetailContainer className={`${baseClass}`}>
       <Header title={"resource maker"}></Header>
       <main className="main">
-        <Sidebar
-          items={sidebarContent}
-          className={`${showSidebar ? "" : "hide"}`}
-        ></Sidebar>
-        <section className="content">
+        <Sidebar></Sidebar>
+        <ContentContainer className="content">
           <div className="navbar">
-            <span onClick={() => setshowSidebar((val) => !val)}>
+            <span>
               <Edit />
             </span>
-            <span style={{ height: "100%" }}>
+            <span>
               <Breadcrumb navLinks={navlinks} />
+            </span>
+            <span onClick={toggleFolderShow}>
+              {folderShow === FolderShowEnum.list ? <ListIcon /> : <GridIcon />}
             </span>
           </div>
           {/* <Audio/> */}
           {component}
-        </section>
+        </ContentContainer>
       </main>
-    </div>
+    </DetailContainer>
   )
 }
 

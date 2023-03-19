@@ -2,6 +2,7 @@ import React, { ChangeEvent, useState } from "react"
 import Search from "../icons/Search"
 import type { Props } from "./types"
 import "./index.scss"
+// import { SearchBoxContainer } from "./style"
 
 const baseClass = "search-box"
 
@@ -29,6 +30,18 @@ const SearchBox: React.FC<Props> = ({
       </div>
       {withIcon && <Search />}
     </div>
+
+    // <SearchBoxContainer className={classes} style={{ width, ...style }}>
+    //   <div className="input">
+    //     <input
+    //       type="text"
+    //       value={value}
+    //       onChange={handleChange}
+    //       placeholder={placeholder}
+    //     />
+    //   </div>
+    //   {withIcon && <Search />}
+    // </SearchBoxContainer>
   )
 }
 

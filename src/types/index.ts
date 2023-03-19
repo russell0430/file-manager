@@ -1,6 +1,7 @@
 // export type
 
 import React from "react"
+import { Option } from "./Option"
 
 export type PlayableType = "audio" | "video" | "txt" | "markdown" | "unknown"
 
@@ -8,7 +9,7 @@ export type Resource = {
   name: string
   label?: string
   imgUrl?: string
-  author: string
+  author?: string
 
   url: string
 }
@@ -28,18 +29,9 @@ export type Link = {
 }
 
 export type Item = {
-  name: string
-  label?: string
   to: string
-  imgUrl?: string // url of pic
-  actions?: Action[]
-}
-
-export type Action = {
-  name: string
-  icon: React.ReactNode
-  handleClick: (item: Item) => void
-}
+  options?: Option[]
+} & Resource
 
 export type Audio = {
   period?: number
@@ -48,5 +40,3 @@ export type Audio = {
 export type Video = {
   period: number
 } & Resource
-
-

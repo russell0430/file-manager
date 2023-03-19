@@ -1,8 +1,8 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { ItemProps, LiItemProps } from "./types"
 import { useRouter } from "@/routes/router"
-import "./index.scss"
 import { useSidebar } from "../useSidebar"
+import { ItemContainer, LiItemContainer } from "./style"
 const LiItem: React.FC<LiItemProps> = ({ item }) => {
   const [open, setOpen] = useState(false)
 
@@ -15,8 +15,8 @@ const LiItem: React.FC<LiItemProps> = ({ item }) => {
     setActiveItem(item.to)
     navigate(item.to)
   }
-  console.log(item.label)
 
+  useEffect(() => {}, [])
   let content
   if (item.children && item.children.length) {
     content = (
@@ -38,9 +38,9 @@ const LiItem: React.FC<LiItemProps> = ({ item }) => {
     )
   }
   return (
-    <li onClick={handleClick} key={item.to}>
+    <LiItemContainer onClick={handleClick} key={item.to}>
       {content}
-    </li>
+    </LiItemContainer>
   )
 }
 
@@ -48,11 +48,11 @@ const Item: React.FC<ItemProps> = (props) => {
   const { items } = props
 
   return (
-    <ul>
+    <ItemContainer className="item">
       {items.map((item) => {
         return <LiItem item={item} key={item.to}></LiItem>
       })}
-    </ul>
+    </ItemContainer>
   )
 }
 

@@ -1,0 +1,10 @@
+@import "../../../scss/styles";
+
+.icon--pencil-square {
+  height: $baseline;
+  width: $baseline;
+
+  .fill {
+    fill: var(--theme-text);
+  }
+}

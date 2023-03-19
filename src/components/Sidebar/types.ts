@@ -1,12 +1,10 @@
+import { Item as BasicItem } from "@/types"
 export type Item = {
-  label: string
-  to: string
-  type: "file" | "folder"
   children?: Item[]
-}
+} & BasicItem
 
-export type SidebarProps = {
-  items: Item[]
+export type Props = {
   style?: React.CSSProperties
   className?: string
+  width?: string | number
 }
